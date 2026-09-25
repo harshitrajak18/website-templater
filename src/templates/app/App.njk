@@ -1,0 +1,14 @@
+import "./index.css";
+{% for section in sections %}
+import { {{ section.component }} } from "./components/{{ section.component }}";
+{% endfor %}
+
+export default function App() {
+  return (
+    <div className="min-h-screen bg-white text-slate-900">
+      {% for section in sections %}
+      <{{ section.component }} />
+      {% endfor %}
+    </div>
+  );
+}
