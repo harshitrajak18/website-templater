@@ -1,17 +1,17 @@
 {
   "name": "website-templater",
-  "version": "1.0.0",
-  "description": "Metadata-driven website templating engine: Metadata → Modifier → Nunjucks → TSX → React/Vite → Static Website",
+  "version": "2.0.0",
+  "description": "Metadata-driven multi-page website templating engine",
   "scripts": {
     "generate": "npx tsx src/generator/generate.ts",
     "dev": "npm run generate && cd dist/site && npm install && npm run dev",
     "build": "npm run generate && cd dist/site && npm install && npm run build",
-    "preview": "npm run generate && cd dist/site && npm install && npm run preview"
+    "preview": "npm run generate && cd dist/site && npm install && npm run preview",
+    "test": "npx tsx src/__tests__/run.ts"
   },
   "devDependencies": {
-    "@types/node": "^20.14.0",
+    "@types/node": "^20.19.43",
     "@types/nunjucks": "^3.2.6",
-    "ts-node": "^10.9.2",
     "tsx": "^4.23.15",
     "typescript": "^5.5.0"
   },

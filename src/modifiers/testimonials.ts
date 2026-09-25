@@ -1,15 +1,15 @@
-import type { TestimonialsMetadata, TestimonialItem } from "../type/type";
+import type { TestimonialsMetadata } from "../type/type";
 
-export interface TestimonialsData {
-  title?: string;
-  description?: string;
-  items: TestimonialItem[];
-}
-
-export function modifyTestimonials(section: TestimonialsMetadata): TestimonialsData {
+export function modifyTestimonials(section: TestimonialsMetadata) {
   return {
-    title: section.title,
-    description: section.description,
-    items: section.items,
+    title: section.title || "Testimonials",
+    description: section.description || "",
+    items: section.items.map((item) => ({
+      quote: item.quote,
+      name: item.name,
+      role: item.role || "",
+      company: item.company || "",
+      avatar: item.avatar || "",
+    })),
   };
 }

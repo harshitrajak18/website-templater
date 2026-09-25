@@ -1,14 +1,40 @@
+import { useState, useEffect } from "react";
 import "./index.css";
-{% for section in sections %}
-import { {{ section.component }} } from "./components/{{ section.component }}";
+{% for page in pages %}
+import {{ page.pageSlug }}Page from "./pages/{{ page.pageSlug }}Page";
 {% endfor %}
 
 export default function App() {
-  return (
-    <div className="min-h-screen bg-white text-slate-900">
-      {% for section in sections %}
-      <{{ section.component }} />
-      {% endfor %}
-    </div>
+  const [currentPath, setCurrentPath] = useState(
+    typeof window !== "undefined" ? window.location.pathname : "/"
   );
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+    };
+
+    window.addEventListener("popstate", handleLocationChange);
+    return () => window.removeEventListener("popstate", handleLocationChange);
+  }, []);
+
+  // Normalize path by trimming trailing slash (except root)
+  const normalizedPath =
+    currentPath.length > 1 && currentPath.endsWith("/")
+      ? currentPath.slice(0, -1)
+      : currentPath;
+
+  {% for page in pages %}
+  {% if page.path == "/" %}
+  if (normalizedPath === "/" || normalizedPath === "" || normalizedPath === "/index.html") {
+    return <{{ page.pageSlug }}Page />;
+  }
+  {% else %}
+  if (normalizedPath === "{{ page.path }}" || normalizedPath === "{{ page.path }}/index.html") {
+    return <{{ page.pageSlug }}Page />;
+  }
+  {% endif %}
+  {% endfor %}
+
+  return <{{ homePageSlug }}Page />;
 }

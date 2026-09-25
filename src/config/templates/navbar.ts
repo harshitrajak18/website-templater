@@ -4,8 +4,6 @@ import { modifyNavbar } from "../../modifiers/navbar";
 
 export const navbarConfig: TemplateConfig = {
   sectionType: "navbar",
-  componentName: "Navbar",
   modifier: (section) => modifyNavbar(section as NavbarMetadata) as unknown as Record<string, unknown>,
   templatePath: "components/Navbar.njk",
-  outputPath: "components/Navbar.tsx",
 };

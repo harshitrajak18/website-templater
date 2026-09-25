@@ -1,385 +1,52 @@
-export function Hero() {
+export function {{ componentName }}() {
   return (
-    <section className="relative isolate overflow-hidden bg-white">
-
-      {/* Background */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-      >
-        <div
-          className="
-            relative
-            left-[calc(50%-11rem)]
-            aspect-[1155/678]
-            w-[36rem]
-            -translate-x-1/2
-            rotate-[30deg]
-            bg-gradient-to-tr
-            from-indigo-400
-            to-purple-400
-            opacity-20
-            sm:left-[calc(50%-30rem)]
-            sm:w-[72rem]
-          "
-        />
+    <section className="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-32">
+      {/* Decorative gradient */}
+      <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
+        <div className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]" style={ { clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" } }></div>
       </div>
 
-
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
-        {% if image and image.enabled and image.src %}
-
-        {# ===================================================== #}
-        {# HERO WITH IMAGE                                       #}
-        {# ===================================================== #}
-
-        <div
-          className="
-            grid
-            items-center
-            gap-12
-            py-16
-            sm:py-20
-            lg:grid-cols-2
-            lg:gap-16
-            lg:py-28
-          "
-        >
-
-          {/* Content */}
-          <div className="text-center lg:text-left">
-
+        <div className="{% if image %}lg:grid lg:grid-cols-2 lg:gap-16 lg:items-center{% else %}text-center max-w-3xl mx-auto{% endif %}">
+          <div className="{% if not image %}mx-auto{% endif %}">
             {% if eyebrow %}
-            <div className="mb-6 flex justify-center lg:justify-start">
-              <span
-                className="
-                  inline-flex
-                  items-center
-                  rounded-full
-                  border
-                  border-indigo-200
-                  bg-indigo-50
-                  px-3
-                  py-1
-                  text-xs
-                  font-semibold
-                  text-indigo-700
-                  sm:text-sm
-                "
-              >
-                {{ eyebrow }}
-              </span>
-            </div>
+              <div className="{% if not image %}justify-center{% endif %} mb-6 flex">
+                <span className="rounded-full bg-indigo-50 px-3 py-1 text-sm font-semibold leading-6 text-indigo-600 ring-1 ring-inset ring-indigo-600/20">
+                  {{ eyebrow }}
+                </span>
+              </div>
             {% endif %}
-
-
-            {% if title %}
-            <h1
-              className="
-                text-balance
-                text-4xl
-                font-bold
-                tracking-tight
-                text-slate-900
-                sm:text-5xl
-                lg:text-6xl
-              "
-            >
+            
+            <h1 className="text-4xl font-bold tracking-tight text-slate-900 sm:text-6xl">
               {{ title }}
             </h1>
-            {% endif %}
-
-
+            
             {% if description %}
-            <p
-              className="
-                mx-auto
-                mt-6
-                max-w-2xl
-                text-pretty
-                text-base
-                leading-7
-                text-slate-600
-                sm:text-lg
-                sm:leading-8
-                lg:mx-0
-              "
-            >
-              {{ description }}
-            </p>
+              <p className="mt-6 text-lg leading-8 text-slate-600">
+                {{ description }}
+              </p>
             {% endif %}
 
-
-            {% if primaryButton or secondaryButton %}
-            <div
-              className="
-                mt-8
-                flex
-                flex-col
-                gap-3
-                sm:flex-row
-                sm:justify-center
-                lg:justify-start
-              "
-            >
-
+            <div className="mt-10 flex items-center {% if not image %}justify-center{% endif %} gap-x-6">
               {% if primaryButton %}
-              <a
-                href="{{ primaryButton.href }}"
-                className="
-                  inline-flex
-                  items-center
-                  justify-center
-                  rounded-lg
-                  bg-slate-900
-                  px-5
-                  py-3
-                  text-sm
-                  font-semibold
-                  text-white
-                  shadow-sm
-                  transition-all
-                  duration-200
-                  hover:-translate-y-0.5
-                  hover:bg-slate-800
-                  hover:shadow-lg
-                  focus-visible:outline-2
-                  focus-visible:outline-offset-2
-                  focus-visible:outline-slate-900
-                  sm:px-6
-                  sm:py-3.5
-                "
-              >
-                {{ primaryButton.text }}
-              </a>
+                <a href="{{ primaryButton.href }}" className="rounded-md bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-colors">
+                  {{ primaryButton.text }}
+                </a>
               {% endif %}
-
-
               {% if secondaryButton %}
-              <a
-                href="{{ secondaryButton.href }}"
-                className="
-                  inline-flex
-                  items-center
-                  justify-center
-                  rounded-lg
-                  border
-                  border-slate-200
-                  bg-white
-                  px-5
-                  py-3
-                  text-sm
-                  font-semibold
-                  text-slate-700
-                  shadow-sm
-                  transition-all
-                  duration-200
-                  hover:-translate-y-0.5
-                  hover:border-slate-300
-                  hover:bg-slate-50
-                  hover:shadow-md
-                  focus-visible:outline-2
-                  focus-visible:outline-offset-2
-                  focus-visible:outline-slate-400
-                  sm:px-6
-                  sm:py-3.5
-                "
-              >
-                {{ secondaryButton.text }}
-              </a>
+                <a href="{{ secondaryButton.href }}" className="text-sm font-semibold leading-6 text-slate-900 hover:text-indigo-600 transition-colors">
+                  {{ secondaryButton.text }} <span aria-hidden="true">→</span>
+                </a>
               {% endif %}
-
             </div>
-            {% endif %}
-
           </div>
-
-
-          {/* Image */}
-          <div className="relative">
-
-            <div
-              className="
-                overflow-hidden
-                rounded-2xl
-                border
-                border-slate-200
-                bg-slate-100
-                shadow-2xl
-              "
-            >
-              <img
-                src="{{ image.src }}"
-                alt="{{ image.alt | default('Hero image') }}"
-                className="
-                  h-auto
-                  w-full
-                  object-cover
-                "
-              />
+          
+          {% if image %}
+            <div className="mt-16 sm:mt-24 lg:mt-0">
+              <img src="{{ image.src }}" alt="{{ image.alt | default('Hero image') }}" className="rounded-2xl shadow-xl ring-1 ring-slate-900/10 object-cover w-full" />
             </div>
-
-          </div>
-
+          {% endif %}
         </div>
-
-
-        {% else %}
-
-        {# ===================================================== #}
-        {# CENTERED HERO WITHOUT IMAGE                           #}
-        {# ===================================================== #}
-
-        <div
-          className="
-            mx-auto
-            max-w-4xl
-            py-20
-            text-center
-            sm:py-28
-            lg:py-36
-          "
-        >
-
-          {% if eyebrow %}
-          <div className="mb-6 flex justify-center">
-            <span
-              className="
-                inline-flex
-                items-center
-                rounded-full
-                border
-                border-indigo-200
-                bg-indigo-50
-                px-3
-                py-1
-                text-xs
-                font-semibold
-                text-indigo-700
-                sm:text-sm
-              "
-            >
-              {{ eyebrow }}
-            </span>
-          </div>
-          {% endif %}
-
-
-          {% if title %}
-          <h1
-            className="
-              text-balance
-              text-4xl
-              font-bold
-              tracking-tight
-              text-slate-900
-              sm:text-5xl
-              lg:text-6xl
-              xl:text-7xl
-            "
-          >
-            {{ title }}
-          </h1>
-          {% endif %}
-
-
-          {% if description %}
-          <p
-            className="
-              mx-auto
-              mt-6
-              max-w-2xl
-              text-pretty
-              text-base
-              leading-7
-              text-slate-600
-              sm:text-lg
-              sm:leading-8
-            "
-          >
-            {{ description }}
-          </p>
-          {% endif %}
-
-
-          {% if primaryButton or secondaryButton %}
-          <div
-            className="
-              mt-10
-              flex
-              flex-col
-              gap-3
-              sm:flex-row
-              sm:justify-center
-            "
-          >
-
-            {% if primaryButton %}
-            <a
-              href="{{ primaryButton.href }}"
-              className="
-                inline-flex
-                items-center
-                justify-center
-                rounded-lg
-                bg-slate-900
-                px-5
-                py-3
-                text-sm
-                font-semibold
-                text-white
-                shadow-sm
-                transition-all
-                hover:-translate-y-0.5
-                hover:bg-slate-800
-                hover:shadow-lg
-                sm:px-6
-                sm:py-3.5
-              "
-            >
-              {{ primaryButton.text }}
-            </a>
-            {% endif %}
-
-
-            {% if secondaryButton %}
-            <a
-              href="{{ secondaryButton.href }}"
-              className="
-                inline-flex
-                items-center
-                justify-center
-                rounded-lg
-                border
-                border-slate-200
-                bg-white
-                px-5
-                py-3
-                text-sm
-                font-semibold
-                text-slate-700
-                shadow-sm
-                transition-all
-                hover:-translate-y-0.5
-                hover:border-slate-300
-                hover:bg-slate-50
-                hover:shadow-md
-                sm:px-6
-                sm:py-3.5
-              "
-            >
-              {{ secondaryButton.text }}
-            </a>
-            {% endif %}
-
-          </div>
-          {% endif %}
-
-        </div>
-
-        {% endif %}
-
       </div>
     </section>
   );

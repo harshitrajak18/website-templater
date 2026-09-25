@@ -1,16 +1,11 @@
 import type { NavbarMetadata } from "../type/type";
+import { resolveLink, resolveButton } from "../utils/routes";
 
-export interface NavbarData {
-  name: string;
-  button?: {
-    text: string;
-    href: string;
-  };
-}
-
-export function modifyNavbar(section: NavbarMetadata): NavbarData {
+export function modifyNavbar(section: NavbarMetadata) {
   return {
-    name: section.name,
-    button: section.button,
+    name: section.name || "",
+    logo: section.logo || "",
+    links: (section.links || []).map(resolveLink),
+    button: section.button ? resolveButton(section.button) : undefined,
   };
 }

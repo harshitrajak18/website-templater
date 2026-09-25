@@ -1,29 +1,13 @@
 import type { HeroMetadata } from "../type/type";
+import { resolveButton } from "../utils/routes";
 
-export interface HeroData {
-  eyebrow?: string;
-  title: string;
-  description?: string;
-  primaryButton?: { text: string; href: string };
-  secondaryButton?: { text: string; href: string };
-  image?: { src: string; alt: string };
-}
-
-export function modifyHero(section: HeroMetadata): HeroData {
-  const image =
-    section.image?.enabled && section.image.src
-      ? {
-          src: section.image.src,
-          alt: section.image.alt ?? "Hero image",
-        }
-      : undefined;
-
+export function modifyHero(section: HeroMetadata) {
   return {
-    eyebrow: section.eyebrow,
+    eyebrow: section.eyebrow || "",
     title: section.title,
-    description: section.description,
-    primaryButton: section.primaryButton,
-    secondaryButton: section.secondaryButton,
-    image,
+    description: section.description || "",
+    primaryButton: section.primaryButton ? resolveButton(section.primaryButton) : undefined,
+    secondaryButton: section.secondaryButton ? resolveButton(section.secondaryButton) : undefined,
+    image: section.image ? { src: section.image.src, alt: section.image.alt || "Hero image" } : undefined,
   };
 }

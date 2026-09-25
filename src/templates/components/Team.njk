@@ -1,0 +1,52 @@
+export function {{ componentName }}() {
+  return (
+    <section className="bg-slate-50 py-24 sm:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl lg:mx-0">
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">{{ title }}</h2>
+          {% if description %}
+            <p className="mt-6 text-lg leading-8 text-slate-600">{{ description }}</p>
+          {% endif %}
+        </div>
+        
+        {% if members %}
+          <ul role="list" className="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+            {% for member in members %}
+              <li>
+                <div className="relative rounded-2xl bg-white p-8 shadow-sm ring-1 ring-slate-200">
+                  {% if member.image %}
+                    <img className="mx-auto h-32 w-32 rounded-full object-cover shadow-sm ring-2 ring-indigo-50" src="{{ member.image }}" alt="{{ member.name }}" />
+                  {% else %}
+                    <div className="mx-auto flex h-32 w-32 items-center justify-center rounded-full bg-indigo-100 text-3xl font-bold text-indigo-600 shadow-sm ring-2 ring-indigo-50">
+                      {{ member.name | first }}
+                    </div>
+                  {% endif %}
+                  
+                  <h3 className="mt-6 text-center text-lg font-semibold leading-7 tracking-tight text-slate-900">{{ member.name }}</h3>
+                  <p className="text-center text-sm leading-6 text-indigo-600">{{ member.role }}</p>
+                  
+                  {% if member.bio %}
+                    <p className="mt-4 text-center text-sm leading-6 text-slate-600 line-clamp-3">{{ member.bio }}</p>
+                  {% endif %}
+                  
+                  {% if member.socialLinks %}
+                    <ul role="list" className="mt-6 flex justify-center gap-x-6">
+                      {% for social in member.socialLinks %}
+                        <li>
+                          <a href="{{ social.url }}" className="text-slate-400 hover:text-slate-500">
+                            <span className="sr-only">{{ social.platform }}</span>
+                            <span className="text-sm font-medium">{{ social.platform }}</span>
+                          </a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  {% endif %}
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </section>
+  );
+}

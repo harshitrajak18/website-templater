@@ -1,0 +1,15 @@
+export function {{ componentName }}() {
+  return (
+    <section className="bg-white py-24 sm:py-32">
+      <div className="mx-auto max-w-3xl px-6 lg:px-8">
+        {% if title %}
+          <h2 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl mb-8">{{ title }}</h2>
+        {% endif %}
+        <div className="prose prose-lg prose-slate max-w-none">
+          {/* Content is rendered safely according to instructions */}
+          {{ content }}
+        </div>
+      </div>
+    </section>
+  );
+}
